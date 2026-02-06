@@ -1,0 +1,24 @@
+# Basic Web App Framework
+streamlit
+
+# Data Processing and Numerical Operations
+pandas
+numpy
+
+# Machine Learning and Deep Learning
+scikit-learn
+torch
+torchvision
+joblib
+
+# Natural Language Processing (NLP)
+nltk
+spacy
+
+# Explainable AI (XAI)
+lime
+
+# External APIs and Utilities
+cohere
+requests
+python-dotenv
