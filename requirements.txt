@@ -4,6 +4,7 @@ streamlit
 # Data Processing and Numerical Operations
 pandas
 numpy
+langdetect
 
 # Machine Learning and Deep Learning
 scikit-learn
@@ -22,4 +23,5 @@ lime
 # External APIs and Utilities
 cohere
 requests
+
 python-dotenv
