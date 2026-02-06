@@ -77,8 +77,11 @@ def show_report_modal(username, comment, label, confidence):
         st.rerun()
 
 # --- 3. GLOBAL INITIALIZATION (COHERE & MODELS) ---
-cohere_api_key = os.getenv('COHERE_API_KEY')
-client = Client(api_key=cohere_api_key) if cohere_api_key else None
+try:
+    api_key = st.secrets["Yd9y3bAuT1YaT7RwcdYbq22Y2GAipGNlX1s5aQCw"]
+    client = Client(cohere_api_key=api_key) if api_key else None
+except Exception as e:
+    st.error("API Key not found in Streamlit Secrets!")
 
 @st.cache_resource
 def load_models():
@@ -418,4 +421,5 @@ else:
         st.subheader("🚨 Platform Integrity Action")
         if st.button("🚩 Formal Report User to Admin", type="secondary"):
             show_report_modal(ext_username, user_input, label, f"{avg_toxic*100:.1f}%")
+
         st.markdown('</div>', unsafe_allow_html=True)
