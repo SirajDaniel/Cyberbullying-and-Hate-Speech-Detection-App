@@ -67,3 +67,4 @@ observer.observe(document.body, { childList: true, subtree: true });
 // Initial run for tweets already on the page
 
 document.querySelectorAll('[data-testid="tweet"]').forEach(injectButton);
+
