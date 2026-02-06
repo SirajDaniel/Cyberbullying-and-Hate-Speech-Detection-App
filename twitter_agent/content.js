@@ -38,7 +38,7 @@ function injectButton(tweet) {
             const username = userElement ? userElement.innerText.split('\n')[1] || "Unknown" : "Unknown_User";
             
             // Send to your Streamlit App
-            const url = `http://localhost:8501/?username=${encodeURIComponent(username)}&comment=${encodeURIComponent(tweetText)}`;
+            const url = `https://cyberbullying-and-hate-speech-detection.streamlit.app/?username=${encodeURIComponent(username)}&comment=${encodeURIComponent(tweetText)}`;
             window.open(url, '_blank'); 
         } catch (err) {
             console.error("Agent Scraper Error:", err);
@@ -65,4 +65,5 @@ const observer = new MutationObserver((mutations) => {
 observer.observe(document.body, { childList: true, subtree: true });
 
 // Initial run for tweets already on the page
+
 document.querySelectorAll('[data-testid="tweet"]').forEach(injectButton);
