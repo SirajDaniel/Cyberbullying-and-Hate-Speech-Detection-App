@@ -303,9 +303,9 @@ else:
         # --- SECTION: AUTOMATED BEHAVIORAL INTELLIGENCE ---
         # Only show this for extension users as well
             if ext_comment:
+    
             st.markdown("### 🧠 Automated Behavioral Intelligence")
             col_intel1, col_intel2 = st.columns([2, 1])  # Variables created here
-            
             with col_intel1:
                 st.markdown(f"""
                     <div style="background-color: #1E2129; padding: 20px; border-radius: 10px; border-left: 5px solid {status_color};">
@@ -436,3 +436,4 @@ else:
            show_report_modal(ext_username, user_input, label, f"{avg_toxic*100:.1f}%")
 
            st.markdown('</div>', unsafe_allow_html=True)
+
