@@ -279,11 +279,10 @@ else:
         label = "TOXIC" if avg_toxic > 0.7 else ("SUSPICIOUS" if avg_toxic > 0.3 else "SAFE")
 
      # --- SECTION: AUTOMATED BEHAVIORAL INTELLIGENCE ---
+# --- SECTION: AUTOMATED BEHAVIORAL INTELLIGENCE ---
         if ext_comment:
-            # All these lines below MUST be indented further than the 'if' above
             st.markdown("### 🧠 Automated Behavioral Intelligence")
             col_intel1, col_intel2 = st.columns([2, 1])
-            
             with col_intel1:
                 st.markdown(f"""
                     <div style="background-color: #1E2129; padding: 20px; border-radius: 10px; border-left: 5px solid {status_color};">
@@ -291,7 +290,6 @@ else:
                         <p style="font-size: 1.1rem;">{behavior_intent}</p>
                     </div>
                 """, unsafe_allow_html=True)
-            
             with col_intel2:
                 st.markdown(f"""
                     <div style="background-color: #161920; padding: 20px; border-radius: 10px; border: 1px solid #333; text-align: center;">
@@ -299,20 +297,13 @@ else:
                         <div style="font-size: 1.2rem; font-weight: bold; color: {status_color};">
                             {rec_action}
                         </div>
+                        <small>Based on Platform Safety Protocol v2.6</small>
                     </div>
                 """, unsafe_allow_html=True)
-        with col_intel2:
-            st.markdown(f"""
-                <div style="background-color: #161920; padding: 20px; border-radius: 10px; border: 1px solid #333; text-align: center;">
-                    <h4 style="margin-top:0;">Recommended Action</h4>
-                    <div style="font-size: 1.2rem; font-weight: bold; color: {status_color}; margin-bottom: 10px;">
-                        {rec_action}
-                    </div>
-                    <small>Based on Platform Safety Protocol v2.6</small>
-                </div>
-            """, unsafe_allow_html=True)
 
         # --- SECTION 2: STATUS & GAUGES ---
+        # NOTICE: These lines are now indented LESS than the ones above.
+        # They align vertically with the 'if ext_comment' line.
         st.markdown("<br>", unsafe_allow_html=True)
         st.markdown(f'<div class="status-badge" style="background-color: {status_color};">STATUS: {label}</div>', unsafe_allow_html=True)
         
@@ -409,5 +400,6 @@ else:
            show_report_modal(ext_username, user_input, label, f"{avg_toxic*100:.1f}%")
 
            st.markdown('</div>', unsafe_allow_html=True)
+
 
 
