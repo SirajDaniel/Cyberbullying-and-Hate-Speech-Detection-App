@@ -303,21 +303,31 @@ else:
         # --- SECTION: AUTOMATED BEHAVIORAL INTELLIGENCE ---
         # Only show this for extension users as well
             if ext_comment:
-              st.markdown("### 🧠 Automated Behavioral Intelligence")
-              col_intel1, col_intel2 = st.columns([2, 1])
+            st.markdown("### 🧠 Automated Behavioral Intelligence")
+            col_intel1, col_intel2 = st.columns([2, 1])  # Variables created here
+            
             with col_intel1:
                 st.markdown(f"""
-                <div style="background-color: #1E2129; padding: 20px; border-radius: 10px; border-left: 5px solid {status_color};">
-                    <h4 style="margin-top:0; color:{status_color};">Behavioral Intent</h4>
-                    <p style="font-size: 1.1rem;">{behavior_intent}</p>
-                    <hr style="border-color: #333;">
-                    <p style="font-size: 0.9rem; color: #aaa;">
-                        <b>System Logic:</b> The ensemble agreement of {avg_toxic*100:.1f}% triggered this 
-                        behavioral profile. The { "Neural LSTM" if lstm_score > svm_score else "Statistical SVM" } 
-                        was the primary signal influencer.
-                    </p>
-                </div>
-            """, unsafe_allow_html=True)
+                    <div style="background-color: #1E2129; padding: 20px; border-radius: 10px; border-left: 5px solid {status_color};">
+                        <h4 style="margin-top:0; color:{status_color};">Behavioral Intent</h4>
+                        <p style="font-size: 1.1rem;">{behavior_intent}</p>
+                        <hr style="border-color: #333;">
+                        <p style="font-size: 0.9rem; color: #aaa;">
+                            <b>System Logic:</b> The ensemble agreement of {avg_toxic*100:.1f}% triggered this 
+                            behavioral profile.
+                        </p>
+                    </div>
+                """, unsafe_allow_html=True)
+            with col_intel2:  # Variable used here - now safe because it's inside the IF
+                st.markdown(f"""
+                    <div style="background-color: #161920; padding: 20px; border-radius: 10px; border: 1px solid #333; text-align: center;">
+                        <h4 style="margin-top:0;">Recommended Action</h4>
+                        <div style="font-size: 1.2rem; font-weight: bold; color: {status_color}; margin-bottom: 10px;">
+                            {rec_action}
+                        </div>
+                        <small>Based on Platform Safety Protocol v2.6</small>
+                    </div>
+                """, unsafe_allow_html=True)
         with col_intel2:
             st.markdown(f"""
                 <div style="background-color: #161920; padding: 20px; border-radius: 10px; border: 1px solid #333; text-align: center;">
@@ -424,4 +434,5 @@ else:
            st.subheader("🚨 Platform Integrity Action")
         if st.button("🚩 Formal Report User to Admin", type="secondary"):
            show_report_modal(ext_username, user_input, label, f"{avg_toxic*100:.1f}%")
+
            st.markdown('</div>', unsafe_allow_html=True)
