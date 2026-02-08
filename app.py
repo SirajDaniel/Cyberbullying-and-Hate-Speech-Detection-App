@@ -272,8 +272,33 @@ else:
             st.stop()
 
         # EXECUTE ANALYSIS
+        # EXECUTE ANALYSIS
         svm_score, lstm_score = analyze_text_scores(user_input)
         avg_toxic = (svm_score + lstm_score) / 2
+        
+        behavior_intent, rec_action, status_color = generate_advanced_intelligence(svm_score, lstm_score)
+        label = "TOXIC" if avg_toxic > 0.7 else ("SUSPICIOUS" if avg_toxic > 0.3 else "SAFE")
+
+        # --- RE-ADD SECTION 1: ACCOUNT RISK PROFILING ---
+         if ext_comment:
+            st.markdown('<div class="dashboard-card" style="border-top: 4px solid #1DA1F2;">', unsafe_allow_html=True)
+            st.subheader(f"👤 Account Integrity Profile: @{ext_username}")
+            flag_count, past_tweets = scan_twitter_history(ext_username)
+            
+            m1, m2, m3 = st.columns(3)
+            with m1: st.metric("Other Posts Scanned", len(past_tweets))
+            with m2: st.metric("Timeline Violations", flag_count)
+            with m3: st.metric("Risk Level", "DANGER" if flag_count > 2 else "STABLE")
+            
+            if flag_count > 0:
+                st.warning(f"This user has made {flag_count} other toxic comments in recent Twitter history.")
+                with st.expander("View found historical violations on Twitter"):
+                    for pt in past_tweets:
+                        if pt['toxic']:
+                            st.error(f"🚩 **Flagged Content:** `{pt['text']}`")
+            else:
+                st.success("No toxic comments identified in simulated user history.")
+                st.markdown('</div>', unsafe_allow_html=True)
         
         behavior_intent, rec_action, status_color = generate_advanced_intelligence(svm_score, lstm_score)
         label = "TOXIC" if avg_toxic > 0.7 else ("SUSPICIOUS" if avg_toxic > 0.3 else "SAFE")
@@ -406,6 +431,7 @@ else:
             if st.button("🚩 Formal Report User to Admin", type="secondary"):
                 show_report_modal(ext_username, user_input, label, f"{avg_toxic*100:.1f}%")
             st.markdown('</div>', unsafe_allow_html=True)
+
 
 
 
