@@ -282,7 +282,7 @@ else:
         # --- RE-ADD SECTION 1: ACCOUNT RISK PROFILING ---
         if ext_comment:
             st.markdown('<div class="dashboard-card" style="border-top: 4px solid #1DA1F2;">', unsafe_allow_html=True)
-            st.subheader(f"👤 Account Integrity Profile: @{ext_username}")
+            st.subheader(f"Account Integrity Profile: @{ext_username}")
             flag_count, past_tweets = scan_twitter_history(ext_username)
             
             m1, m2, m3 = st.columns(3)
@@ -431,6 +431,7 @@ else:
             if st.button("🚩 Formal Report User to Admin", type="secondary"):
                 show_report_modal(ext_username, user_input, label, f"{avg_toxic*100:.1f}%")
             st.markdown('</div>', unsafe_allow_html=True)
+
 
 
 
