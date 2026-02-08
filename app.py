@@ -354,10 +354,20 @@ else:
             ax_break.set_facecolor('#1E2129'); ax_break.tick_params(colors='white'); ax_break.set_ylabel('Confidence (%)', color='white')
             st.pyplot(fig_break)
             
-        with d_col2:
+       with d_col2:
             st.subheader("🧠 Reasoning & Intent Analysis")
-            # Logic-based reasoning generation replaces severity benchmarking
-            if abs(lstm_score - svm_score) < 0.15:
+            
+            # This logic applies to BOTH Manual and Twitter analysis
+            # 1. First, check if the ensemble average is in the safe range
+            if avg_toxic <= 0.3:
+                intent_type = "Safe / Constructive"
+                reasoning = (
+                    "The ensemble analysis confirms the content is within platform safety guidelines. "
+                    "Both models show low confidence for toxic intent or harmful lexical patterns."
+                )
+            
+            # 2. If the score is high, determine the SPECIFIC type of violation
+            elif abs(lstm_score - svm_score) < 0.15:
                 intent_type = "Direct Violation"
                 reasoning = (
                     "Both detection engines are in high agreement. The content contains "
@@ -376,10 +386,9 @@ else:
                     "threat is lower, the presence of these specific terms warrants a restriction."
                 )
 
+            # Display the result (Applicable for @ManualEntry and @TwitterUser)
             st.markdown(f"**Primary Intent Profile:** `{intent_type}`")
             st.info(reasoning)
-            
-            # Moderator Tip removed
 
         st.markdown('</div>', unsafe_allow_html=True)
 
@@ -399,6 +408,7 @@ else:
             if st.button("🚩 Formal Report User to Admin", type="secondary"):
                 show_report_modal(ext_username, user_input, label, f"{avg_toxic*100:.1f}%")
             st.markdown('</div>', unsafe_allow_html=True)
+
 
 
 
