@@ -354,11 +354,9 @@ else:
             ax_break.set_facecolor('#1E2129'); ax_break.tick_params(colors='white'); ax_break.set_ylabel('Confidence (%)', color='white')
             st.pyplot(fig_break)
             
-       with d_col2:
+        with d_col2:
             st.subheader("🧠 Reasoning & Intent Analysis")
-            
-            # This logic applies to BOTH Manual and Twitter analysis
-            # 1. First, check if the ensemble average is in the safe range
+
             if avg_toxic <= 0.3:
                 intent_type = "Safe / Constructive"
                 reasoning = (
@@ -408,6 +406,7 @@ else:
             if st.button("🚩 Formal Report User to Admin", type="secondary"):
                 show_report_modal(ext_username, user_input, label, f"{avg_toxic*100:.1f}%")
             st.markdown('</div>', unsafe_allow_html=True)
+
 
 
 
