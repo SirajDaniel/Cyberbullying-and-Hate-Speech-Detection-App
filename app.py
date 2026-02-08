@@ -393,12 +393,13 @@ else:
 
         # --- SECTION 6: PLATFORM INTEGRITY ACTION ---
         # Hide the reporting button for manual entry
-      if ext_comment:
+        if ext_comment:
             st.markdown('<div class="dashboard-card" style="border: 1px solid #ff4b4b;">', unsafe_allow_html=True)
             st.subheader("🚨 Platform Integrity Action")
             if st.button("🚩 Formal Report User to Admin", type="secondary"):
                 show_report_modal(ext_username, user_input, label, f"{avg_toxic*100:.1f}%")
             st.markdown('</div>', unsafe_allow_html=True)
+
 
 
 
