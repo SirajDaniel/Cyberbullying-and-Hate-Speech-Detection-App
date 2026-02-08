@@ -104,15 +104,15 @@ def generate_advanced_intelligence(svm_s, lstm_s):
         action = "None (Approved)"
         color = "#00d26a"
     elif diff > 0.25 and lstm_s > svm_s:
-        behavior = "🎭 **Sophisticated Harassment:** Intentional use of context to mask toxicity (sarcasm or dog-whistling)."
+        behavior = "Sophisticated Harassment: (Intentional use of context to mask toxicity)."
         action = "Shadow-Hide & Human Review"
         color = "#ffaa00"
     elif svm_s > 0.8:
-        behavior = "🔥 **Explicit Aggression:** High frequency of toxic tokens and direct verbal attacks."
+        behavior = "Explicit Aggression: (High frequency of toxic tokens and direct verbal attacks)."
         action = "Immediate Removal & Account Flag"
         color = "#ff4b4b"
     else:
-        behavior = "⚖️ **General Toxicity:** Standard violation involving derogatory language or insults."
+        behavior = "General Toxicity: Standard violation involving derogatory language or insults."
         action = "Warning Issued"
         color = "#ff4b4b"
     return behavior, action, color
@@ -247,7 +247,7 @@ else:
     st.title("🛡️ Advanced Hate Speech Agent")
     
     if ext_comment:
-        st.info(f"📬 **Agent Triggered!** Analyzing Twitter Post from: **@{ext_username}**")
+        st.info(f"**Agent Triggered!** Analyzing Twitter Post from: **@{ext_username}**")
         st.markdown(f'<div style="background-color: #161920; padding: 20px; border-radius: 10px; border-left: 5px solid #1DA1F2; margin-bottom: 25px;"><i>"{ext_comment}"</i></div>', unsafe_allow_html=True)
 
     if not ext_comment:
@@ -259,7 +259,7 @@ else:
 
     if analyze_trigger:
         if not user_input.strip():
-            st.error("🛑 **Input Required: No Text Detected**")
+            st.error("**Input Required: No Text Detected**")
             st.stop()
 
         try:
@@ -281,7 +281,7 @@ else:
      # --- SECTION: AUTOMATED BEHAVIORAL INTELLIGENCE ---
 # --- SECTION: AUTOMATED BEHAVIORAL INTELLIGENCE ---
         if ext_comment:
-            st.markdown("### 🧠 Automated Behavioral Intelligence")
+            st.markdown("### Automated Behavioral Intelligence")
             col_intel1, col_intel2 = st.columns([2, 1])
             with col_intel1:
                 st.markdown(f"""
@@ -364,7 +364,7 @@ else:
                     "explicitly toxic keywords and a sentence structure designed to attack."
                 )
             elif lstm_score > svm_score:
-                intent_type = "Coaxing/Sarcastic Harassment"
+                intent_type = "Sarcastic Harassment"
                 reasoning = (
                     "The Neural LSTM model detected harmful intent that the word-filter (SVM) missed. "
                     "This suggests the user is using context, tone, or sarcasm to mask their aggression."
@@ -385,7 +385,7 @@ else:
 
         # --- SECTION 5: REPHRASING ---
         st.markdown('<div class="dashboard-card">', unsafe_allow_html=True)
-        st.subheader("✨ Text Optimization: Before vs. After")
+        st.subheader("Text Optimization: Before vs. After")
         refined = rephrase_with_retry(user_input, client)
         st.markdown(f'<div class="comparison-box original-box"><b>BEFORE:</b> {user_input}</div>', unsafe_allow_html=True)
         st.markdown(f'<div class="comparison-box rephrased-box"><b>AFTER:</b> {refined}</div>', unsafe_allow_html=True)
@@ -393,13 +393,12 @@ else:
 
         # --- SECTION 6: PLATFORM INTEGRITY ACTION ---
         # Hide the reporting button for manual entry
-        if ext_comment:
-           st.markdown('<div class="dashboard-card" style="border: 1px solid #ff4b4b;">', unsafe_allow_html=True)
-           st.subheader("🚨 Platform Integrity Action")
-        if st.button("🚩 Formal Report User to Admin", type="secondary"):
-           show_report_modal(ext_username, user_input, label, f"{avg_toxic*100:.1f}%")
-
-           st.markdown('</div>', unsafe_allow_html=True)
+      if ext_comment:
+            st.markdown('<div class="dashboard-card" style="border: 1px solid #ff4b4b;">', unsafe_allow_html=True)
+            st.subheader("🚨 Platform Integrity Action")
+            if st.button("🚩 Formal Report User to Admin", type="secondary"):
+                show_report_modal(ext_username, user_input, label, f"{avg_toxic*100:.1f}%")
+            st.markdown('</div>', unsafe_allow_html=True)
 
 
 
